@@ -7,16 +7,16 @@
       <h2 class="chat-title">Чат не найден</h2>
     </div>
 
-    <el-skeleton v-if="loadingMessages" animated :rows="4" />
+    <el-skeleton v-if="loadingMessages" animated :rows="4"/>
 
     <template v-else>
-      <MessageList v-if="chat" :messages="messages" />
+      <MessageList v-if="chat" :messages="messages"/>
       <div v-else class="chat-empty">
         Выберите чат слева или создайте новый.
       </div>
     </template>
 
-    <MessageInput v-if="chat" :sending="sending" @submit="handleSend" />
+    <MessageInput v-if="chat" :sending="sending" @submit="handleSend"/>
   </div>
 </template>
 
@@ -46,7 +46,9 @@ const sending = computed<boolean>(() => store.sending);
 watch(
   chatId,
   id => {
-    if (id) store.loadMessages(id)
+    if (id) {
+      store.loadMessages(id);
+    }
   },
   { immediate: true }
 )
@@ -65,13 +67,16 @@ function handleSend(text: string) {
   flex-direction: column;
   height: 95%;
 }
+
 .chat-header {
   padding: 12px;
   border-bottom: 1px solid #ebeef5;
 }
+
 .chat-title {
   margin: 0;
 }
+
 .chat-empty {
   padding: 16px;
   color: #909399;
