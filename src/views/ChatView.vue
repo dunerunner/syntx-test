@@ -52,8 +52,10 @@ watch(
 )
 
 function handleSend(text: string) {
-  if (!chatId.value) return
-  store.sendMessage(chatId.value, text)
+  if (!chatId.value) {
+    return;
+  }
+  store.sendMessage(chatId.value, text);
 }
 </script>
 
