@@ -6,7 +6,7 @@
           v-model="form.text"
           type="textarea"
           :rows="2"
-          placeholder="Введите сообщение"
+          placeholder="Enter a message"
           @keydown.enter.exact.prevent="onSubmit"
         />
       </el-form-item>
@@ -17,7 +17,7 @@
           :loading="sending"
           @click="onSubmit"
         >
-          Отправить
+          Send
         </el-button>
       </div>
     </el-form>

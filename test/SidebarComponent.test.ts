@@ -28,6 +28,6 @@ describe('SidebarComponent.vue', () => {
 
     const items = wrapper.findAll('[data-test="chat-item"]');
     expect(items.length).toBeGreaterThan(0);
-    expect(wrapper.text()).toContain('Общий');
+    expect(wrapper.text()).toContain('General');
   })
 });

@@ -1,11 +1,11 @@
 <template>
   <div class="sidebar">
-    <h2 class="sidebar-title">Чаты</h2>
+    <h2 class="sidebar-title">Chats</h2>
 
     <div class="sidebar-new-chat">
       <el-input
         v-model="newChatTitle"
-        placeholder="Название чата"
+        placeholder="Chat name"
         @keyup.enter="handleCreateChat"
       />
       <el-button
@@ -14,7 +14,7 @@
         class="sidebar-new-chat-button"
         @click="handleCreateChat"
       >
-        Создать
+        Create
       </el-button>
     </div>
 

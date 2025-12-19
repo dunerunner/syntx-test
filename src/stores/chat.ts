@@ -5,7 +5,7 @@ export interface Chat {
   title: string;
 }
 
-export type Author = 'you' | 'bot'
+export type Author = 'user' | 'bot';
 
 export interface Message {
   id: number;
@@ -24,9 +24,9 @@ export interface ChatState {
 export const useChatStore = defineStore('chat', {
   state: (): ChatState => ({
     chats: [
-      { id: '1', title: 'Общий' },
-      { id: '2', title: 'Работа' },
-      { id: '3', title: 'Поддержка' }
+      { id: '1', title: 'General' },
+      { id: '2', title: 'Work' },
+      { id: '3', title: 'Support' }
     ],
     messagesByChatId: {},
     loadingMessages: false,
@@ -44,15 +44,16 @@ export const useChatStore = defineStore('chat', {
             {
               id: Date.now(),
               author: 'bot',
-              text: 'Привет! Это начало чата.',
+              text: 'Hello! This is the start of the chat.',
               createdAt: new Date().toISOString()
             }
-          ]
+          ];
           this.loadingMessages = false;
           resolve();
         }, 600);
       });
     },
+
     sendMessage(chatId: string, text: string): Promise<Message | void> {
       const trimmed = text.trim();
       if (!trimmed) {
@@ -65,21 +66,24 @@ export const useChatStore = defineStore('chat', {
       this.sending = true;
       const msg: Message = {
         id: Date.now(),
-        author: 'you',
+        author: 'user',
         text: trimmed,
         createdAt: new Date().toISOString()
-      }
+      };
+
       return new Promise(resolve => {
         setTimeout(() => {
           this.messagesByChatId[chatId]?.push(msg);
           this.sending = false;
           resolve(msg);
+
           setTimeout(() => {
             this.addBotReply(chatId, trimmed);
           }, 1200);
         }, 400);
       });
     },
+
     addBotReply(chatId: string, lastText: string) {
       if (!this.messagesByChatId[chatId]) {
         this.messagesByChatId[chatId] = [];
@@ -87,11 +91,12 @@ export const useChatStore = defineStore('chat', {
       const msg: Message = {
         id: Date.now() + 1,
         author: 'bot',
-        text: `Бот: вы написали "${lastText}". Спасибо за сообщение!`,
+        text: `Bot: you wrote "${lastText}". Thanks for your message!`,
         createdAt: new Date().toISOString()
-      }
-      this.messagesByChatId[chatId].push(msg)
+      };
+      this.messagesByChatId[chatId].push(msg);
     },
+
     createChat(title: string): Chat | null {
       const trimmed = title.trim();
       if (!trimmed) {
@@ -99,16 +104,18 @@ export const useChatStore = defineStore('chat', {
       }
       const id = String(Date.now());
       const chat: Chat = { id, title: trimmed };
+
       this.chats.push(chat);
       this.messagesByChatId[id] = [
         {
           id: Date.now(),
           author: 'bot',
-          text: 'Новый чат создан. Напишите первое сообщение.',
+          text: 'New chat created. Write the first message.',
           createdAt: new Date().toISOString()
         }
-      ]
+      ];
+
       return chat;
     }
   }
-})
+});

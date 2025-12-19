@@ -8,7 +8,7 @@ describe('MessageList.vue', () => {
     const messages: Message[] = [
       {
         id: 1,
-        author: 'you',
+        author: 'user',
         text: 'Hello from user',
         createdAt: new Date().toISOString()
       },
@@ -27,7 +27,7 @@ describe('MessageList.vue', () => {
     const allMessages = wrapper.findAll('.message');
     expect(allMessages.length).toBe(2);
 
-    const userMessage = wrapper.find('.message-you');
+    const userMessage = wrapper.find('.message-user');
     const botMessage = wrapper.find('.message-bot');
 
     expect(userMessage.exists()).toBe(true);
@@ -49,6 +49,6 @@ describe('MessageList.vue', () => {
     const allMessages = wrapper.findAll('.message');
     expect(allMessages.length).toBe(0);
 
-    expect(wrapper.text()).toContain('Нет сообщений. Напишите что-нибудь первым.');
+    expect(wrapper.text()).toContain('No messages yet. Be the first to write one.');
   })
 })

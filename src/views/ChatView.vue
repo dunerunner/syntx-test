@@ -4,7 +4,7 @@
       <h2 class="chat-title">{{ chat.title }}</h2>
     </div>
     <div v-else class="chat-header">
-      <h2 class="chat-title">Чат не найден</h2>
+      <h2 class="chat-title">Chat not found</h2>
     </div>
 
     <el-skeleton v-if="loadingMessages" animated :rows="4"/>
@@ -12,7 +12,7 @@
     <template v-else>
       <MessageList v-if="chat" :messages="messages"/>
       <div v-else class="chat-empty">
-        Выберите чат слева или создайте новый.
+        Select a chat on the left or create a new one.
       </div>
     </template>
 

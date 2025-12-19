@@ -4,11 +4,11 @@
       v-for="m in messages"
       :key="m.id"
       class="message"
-      :class="m.author === 'you' ? 'message-you' : 'message-bot'"
+      :class="m.author === 'user' ? 'message-user' : 'message-bot'"
     >
       <div class="message-meta">
         <span class="message-author">
-          {{ m.author === 'you' ? 'Вы' : 'Бот' }}
+          {{ m.author === 'user' ? 'You' : 'Bot' }}
         </span>
         <span class="message-time">{{ formatTime(m.createdAt) }}</span>
       </div>
@@ -16,7 +16,7 @@
     </div>
 
     <div v-if="!messages.length" class="messages-empty">
-      Нет сообщений. Напишите что-нибудь первым.
+      No messages yet. Be the first to write one.
     </div>
   </div>
 </template>
@@ -50,7 +50,7 @@ function formatTime(value: string) {
   padding: 8px 10px;
   border-radius: 6px;
 }
-.message-you {
+.message-user {
   margin-left: auto;
   background: #ecf5ff;
 }
